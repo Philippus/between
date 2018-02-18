@@ -265,7 +265,7 @@ object Relation {
     (for {
       elem <- r1
       elem2 <- r2
-    } yield transitivityTable(elem, elem2)).flatten
+    } yield transitivityTable((elem, elem2))).flatten
   }
 
   def findRelation[T](t: Interval[T], s: Interval[T]): Relation = full.find(_.apply[T](t, s)).get
