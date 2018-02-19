@@ -85,8 +85,8 @@ the [ThreeTen-Extra](http://www.threeten.org/threeten-extra/apidocs/org/threeten
 * `minus`, returns the result of subtracting the supplied interval from this interval
 * `span`, returns the smallest interval that contains this interval and the supplied interval
 * `union`, returns the union of this interval and the supplied interval
-* `with+`, returns a copy of this interval with the supplied `+` endpoint
 * `with-`, returns a copy of this interval with the supplied `-` endpoint
+* `with+`, returns a copy of this interval with the supplied `+` endpoint
 
 ### Reasoning
 I got inspired to write this library `during` Eric Evan's talk at the
