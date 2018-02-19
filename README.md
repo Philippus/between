@@ -75,6 +75,19 @@ val relationBetweenIAndJ = i.findRelation(j) // relationBetweenIAndJ: nl.gn0s1s.
 relationBetweenIAndJ.inverse // res0: nl.gn0s1s.between.Relation = mi
 ```
 
+### Additional methods
+A number of additional methods are availabe on the `Interval[T]` case class, some of which may be familiar for users of
+the [ThreeTen-Extra](http://www.threeten.org/threeten-extra/apidocs/org/threeten/extra/Interval.html) Interval class.
+
+* `chop`, chops this interval into two intervals that meet at the supplied point
+* `gap`, returns the interval that is between this interval and the supplied interval
+* `intersection`, returns the intersection of this interval and the supplied interval
+* `minus`, returns the result of subtracting the supplied interval from this interval
+* `span`, returns the smallest interval that contains this interval and the supplied interval
+* `union`, returns the union of this interval and the supplied interval
+* `with+`, returns a copy of this interval with the supplied `+` endpoint
+* `with-`, returns a copy of this interval with the supplied `-` endpoint
+
 ### Reasoning
 I got inspired to write this library `during` Eric Evan's talk at the
 [Domain-Driven Design Europe 2018](https://dddeurope.com/2018/) conference. I started writing it in the train on my way
