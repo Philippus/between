@@ -45,4 +45,47 @@ final case class Interval[T](`-`: T, `+`: T)(implicit ordering: Ordering[T]) {
   def precededBy(s: Interval[T]): Boolean = s < this // alspaugh
 
   def findRelation(s: Interval[T]): Relation = Relation.findRelation[T](this, s)
+
+  def chop(p: T): Option[(Interval[T], Interval[T])] =
+    if (t.`-` < p && t.`+` > p)
+      Some((Interval[T](t.`-`, p), Interval[T](p, t.`+`)))
+    else
+      None
+
+  def gap(s: Interval[T]): Option[Interval[T]] =
+    if (this < s || this > s) {
+      Some(Interval[T](t.`+`.min(s.`+`), t.`-`.max(s.`-`)))
+    } else
+      None
+
+  def intersection(s: Interval[T]): Option[Interval[T]] =
+    if (!((this < s) || (this m s) || (this mi s) || (this > s)))
+      Some(Interval[T](t.`-`.max(s.`-`), t.`+`.min(s.`+`)))
+    else
+      None
+
+  def span(s: Interval[T]): Interval[T] =
+    Interval[T](t.`-`.min(s.`-`), t.`+`.max(s.`+`))
+
+  def minus(s: Interval[T]): Set[Interval[T]] =
+    if (this == s || (this d s) || (this s s) || (this f s))
+      Set()
+    else if ((this o s) || (this fi s))
+      Set(Interval[T](t.`-`, s.`-`))
+    else if ((this oi s) || (this si s))
+      Set(Interval[T](s.`+`, t.`+`))
+    else if (this di s)
+      Set(Interval[T](t.`-`, s.`-`), Interval[T](s.`+`, t.`+`))
+    else
+      Set(this)
+
+  def union(s: Interval[T]): Option[Interval[T]] =
+    if (!(this < s || this > s))
+      Some(Interval[T](t.`-`.min(s.`-`), t.`+`.max(s.`+`)))
+    else
+      None
+
+  def `with-`(p: T): Interval[T] = this.copy(`-` = p)
+
+  def `with+`(p: T): Interval[T] = this.copy(`+` = p)
 }
