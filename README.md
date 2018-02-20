@@ -15,7 +15,7 @@ Between is published for Scala 2.11 and 2.12. To start using it add the followin
 ```
 resolvers += Resolver.bintrayRepo("gn0s1s", "releases")
 
-libraryDependencies += "nl.gn0s1s" %% "between" % "0.1.0"
+libraryDependencies += "nl.gn0s1s" %% "between" % "0.2.0"
 ```
 
 ## Example usage
