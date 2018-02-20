@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/Philippus/between.svg?branch=master)](https://travis-ci.org/Philippus/between)
 [![codecov](https://codecov.io/gh/Philippus/between/branch/master/graph/badge.svg)](https://codecov.io/gh/Philippus/between)
-![Current Version](https://img.shields.io/badge/version-0.1.0-brightgreen.svg?style=flat "0.1.0")
+![Current Version](https://img.shields.io/badge/version-0.2.0-brightgreen.svg?style=flat "0.2.0")
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat "MIT")](LICENSE.md)
 
 Between is a library for working with (time) intervals and the relations between them. It takes as a basis the thirteen
