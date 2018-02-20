@@ -85,7 +85,7 @@ final case class Interval[T](`-`: T, `+`: T)(implicit ordering: Ordering[T]) {
     else
       None
 
-  def `with-`(p: T): Interval[T] = this.copy(`-` = p)
+  def `with-`(p: T): Interval[T] = Interval[T](p, t.`+`)
 
-  def `with+`(p: T): Interval[T] = this.copy(`+` = p)
+  def `with+`(p: T): Interval[T] = Interval[T](t.`-`, p)
 }
