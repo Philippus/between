@@ -59,7 +59,8 @@ Given two intervals there is always only one of the following thirteen defined r
 | x `starts` y   |   `s`   |  `si`   | y `startedBy` x    | <pre> xxx <br> yyyyy</pre>  |
 | x `finishes` y |   `f`   |  `fi`   | y `finishedBy` x   | <pre>   xxx<br> yyyyy</pre> |
 
-(`before` and `after` are also available as `precedes` and `precededBy`, respectively.)
+* `before` and `after` are also available as `precedes` and `precededBy`, respectively.
+* `finishes` and `finishedBy` are also available as `ends` and `endedBy`.
 
 There's a `findRelation` method which can be used to find out which relation exists between two intervals. The
 `Relation` has an `inverse` method implemented, which gives the inverse of a relation.
@@ -79,12 +80,22 @@ relationBetweenIAndJ.inverse // res0: nl.gn0s1s.between.Relation = mi
 A number of additional methods are availabe on the `Interval[T]` case class, some of which may be familiar for users of
 the [ThreeTen-Extra](http://www.threeten.org/threeten-extra/apidocs/org/threeten/extra/Interval.html) Interval class.
 
-* `chop`, chops this interval into two intervals that meet at the supplied point
+* `abuts`, checks if the interval abuts the supplied interval
+* `encloses`, checks if the interval encloses the supplied interval
+* `enclosedBy`, checks if the interval is enclosed by the supplied interval
 * `gap`, returns the interval that is between this interval and the supplied interval
 * `intersection`, returns the intersection of this interval and the supplied interval
 * `minus`, returns the result of subtracting the supplied interval from this interval
 * `span`, returns the smallest interval that contains this interval and the supplied interval
 * `union`, returns the union of this interval and the supplied interval
+
+Some point related methods are:
+* `after`, checks if the interval is after the supplied point
+* `before`, checks if the interval is before the supplied point
+* `chop`, chops this interval into two intervals that meet at the supplied point
+* `contains`, checks if supplied point is within the interval
+* `endsAt`, checks if the interval ends at the supplied point
+* `startsAt`, checks if the interval starts at the supplied point
 * `with-`, returns a copy of this interval with the supplied `-` endpoint
 * `with+`, returns a copy of this interval with the supplied `+` endpoint
 
@@ -93,7 +104,7 @@ I got inspired to write this library `during` Eric Evan's talk at the
 [Domain-Driven Design Europe 2018](https://dddeurope.com/2018/) conference. I started writing it in the train on my way
 back from the conference, this can be represented like this:
 
-`write lib <-(o)- - train - -(a, mi)-> DDD Europe - -(di)-> EE talk <-(d) - - inspired`
+`write lib <-(o)- - train - -(>, mi)-> DDD Europe - -(di)-> EE talk <-(d) - - inspired`
 
 Since the composition table of relations and the `constraints` method are implemented we can find out what the possible
 relations between `write lib` and `DDD Europe` are:
@@ -104,11 +115,16 @@ import nl.gn0s1s.between._
 Relation.constraints(Set(o), Set(<, m)) // res0: Set[nl.gn0s1s.between.Relation] = Set(<)
 ```
 
-## Links
+## Resources
 Allen's Interval Algebra:
 - [Maintaining Knowledge about Temporal Intervals](https://cse.unl.edu/~choueiry/Documents/Allen-CACM1983.pdf)
 - [Wikipedia entry](https://en.wikipedia.org/wiki/Allen%27s_interval_algebra)
 - Thomas A. Alspaugh's Foundations Material on [Allen's Interval Algebra](http://www.ics.uci.edu/~alspaugh/cls/shr/allen.html)
+
+Related links:
+- [A Modal Logic for Chopping Intervals](https://staff.fnwi.uva.nl/y.venema/papers/1991/vene-moda91.pdf)
+- [SOWL QL: Querying Spatio - Temporal Ontologies in OWL](http://www.intelligence.tuc.gr/~petrakis/publications/SOWLQL-JDS.pdf)
+- [AsterixDB Temporal Functions: Allen’s Relations](https://asterixdb.apache.org/docs/0.8.8-incubating/aql/allens.html)
 
 ## License
 The code is available under the [MIT license](LICENSE.md).

@@ -51,20 +51,21 @@ object IntervalSpec extends Properties("Interval") {
         (i meets j) == (j metBy i) &&
         (i overlaps j) == (j overlappedBy i) &&
         (i finishes j) == (j finishedBy i) &&
+        (i ends j) == (j endedBy i) &&
         (i during j) == (j contains i) &&
         (i starts j) == (j startedBy i) &&
-        (i si j) == (i startedBy j)
+        (i si j) == (i startedBy j) &&
+        (i encloses j) == (j enclosedBy i)
   }
 
   def genDouble = Gen.chooseNum[Double](2, 7)
 
-  property("chop chops an interval into two meeting intervals") = forAll(genIntervalDouble, genDouble) {
-    (i: Interval[Double], d: Double) =>
-      if (d > i.`-` && d < i.`+`) {
-        val chopped = i.chop(d).get
-        Relation.findRelation[Double](chopped._1, chopped._2) == m
-      } else
-        i.chop(d).isEmpty
+  property("abuts returns the expected value") = forAll {
+    (i: Interval[Double], j: Interval[Double]) =>
+      i.findRelation(j) match {
+        case `m` | `mi` => i abuts j
+        case _ => !(i abuts j)
+      }
   }
 
   property("gap returns the expected Interval") = forAll {
@@ -107,6 +108,12 @@ object IntervalSpec extends Properties("Interval") {
       }
   }
 
+  property("span encloses both intervals") = forAll {
+    (i: Interval[Double], j: Interval[Double]) =>
+      val span = i.span(j)
+      (span encloses i) && (span encloses j)
+  }
+
   property("union returns the expected interval") = forAll {
     (i: Interval[Double], j: Interval[Double]) =>
       i.findRelation(j) match {
@@ -116,6 +123,55 @@ object IntervalSpec extends Properties("Interval") {
         case `is` | `si` | `di` | `fi` => i.union(j).contains(Interval(i.`-`, i.`+`))
         case `oi` | `mi` => i.union(j).contains(Interval(j.`-`, i.`+`))
       }
+  }
+
+  property("after returns the expected value") = forAll(genIntervalDouble, genDouble) {
+    (i: Interval[Double], d: Double) =>
+      if (i.`-` > d)
+        i.after(d)
+      else
+        !i.after(d)
+  }
+
+  property("before returns the expected value") = forAll(genIntervalDouble, genDouble) {
+    (i: Interval[Double], d: Double) =>
+      if (i.`+` < d)
+        i.before(d)
+      else
+        !i.before(d)
+  }
+
+  property("chop chops an interval into two meeting intervals") = forAll(genIntervalDouble, genDouble) {
+    (i: Interval[Double], d: Double) =>
+      if (d > i.`-` && d < i.`+`) {
+        val chopped = i.chop(d).get
+        Relation.findRelation[Double](chopped._1, chopped._2) == m
+      } else
+        i.chop(d).isEmpty
+  }
+
+  property("contains returns the expected value") = forAll(genIntervalDouble, genDouble) {
+    (i: Interval[Double], d: Double) =>
+      if (i.`-` >= d && i.`+` <= d)
+        i.contains(d)
+      else
+        !i.contains(d)
+  }
+
+  property("endsAt returns the expected value") = forAll(genIntervalDouble, genDouble) {
+    (i: Interval[Double], d: Double) =>
+      if (i.`+` == d)
+        i.endsAt(d)
+      else
+        !i.endsAt(d)
+  }
+
+  property("startsAt returns the expected value") = forAll(genIntervalDouble, genDouble) {
+    (i: Interval[Double], d: Double) =>
+      if (i.`-` == d)
+        i.startsAt(d)
+      else
+        !i.startsAt(d)
   }
 
   property("with- returns the expected interval") = forAll(genIntervalDouble, genDouble) {
