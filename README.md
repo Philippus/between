@@ -115,11 +115,16 @@ import nl.gn0s1s.between._
 Relation.constraints(Set(o), Set(<, m)) // res0: Set[nl.gn0s1s.between.Relation] = Set(<)
 ```
 
-## Links
+## Resources
 Allen's Interval Algebra:
 - [Maintaining Knowledge about Temporal Intervals](https://cse.unl.edu/~choueiry/Documents/Allen-CACM1983.pdf)
 - [Wikipedia entry](https://en.wikipedia.org/wiki/Allen%27s_interval_algebra)
 - Thomas A. Alspaugh's Foundations Material on [Allen's Interval Algebra](http://www.ics.uci.edu/~alspaugh/cls/shr/allen.html)
+
+Related links:
+- [A Modal Logic for Chopping Intervals](https://staff.fnwi.uva.nl/y.venema/papers/1991/vene-moda91.pdf)
+- [SOWL QL: Querying Spatio - Temporal Ontologies in OWL](http://www.intelligence.tuc.gr/~petrakis/publications/SOWLQL-JDS.pdf)
+- [AsterixDB Temporal Functions: Allen’s Relations](https://asterixdb.apache.org/docs/0.8.8-incubating/aql/allens.html)
 
 ## License
 The code is available under the [MIT license](LICENSE.md).
