@@ -104,7 +104,7 @@ I got inspired to write this library `during` Eric Evan's talk at the
 [Domain-Driven Design Europe 2018](https://dddeurope.com/2018/) conference. I started writing it in the train on my way
 back from the conference, this can be represented like this:
 
-`write lib <-(o)- - train - -(a, mi)-> DDD Europe - -(di)-> EE talk <-(d) - - inspired`
+`write lib <-(o)- - train - -(>, mi)-> DDD Europe - -(di)-> EE talk <-(d) - - inspired`
 
 Since the composition table of relations and the `constraints` method are implemented we can find out what the possible
 relations between `write lib` and `DDD Europe` are:
