@@ -100,7 +100,7 @@ Some point related methods are:
 * `with+`, returns a copy of this interval with the supplied `+` endpoint
 
 ### Reasoning
-I got inspired to write this library `during` Eric Evan's talk at the
+I got inspired to write this library `during` [Eric Evans](https://github.com/ericevans0)' talk at the
 [Domain-Driven Design Europe 2018](https://dddeurope.com/2018/) conference. I started writing it in the train on my way
 back from the conference, this can be represented like this:
 
