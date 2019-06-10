@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/Philippus/between.svg?branch=master)](https://travis-ci.org/Philippus/between)
 [![codecov](https://codecov.io/gh/Philippus/between/branch/master/graph/badge.svg)](https://codecov.io/gh/Philippus/between)
-![Current Version](https://img.shields.io/badge/version-0.4.0-brightgreen.svg?style=flat "0.4.0")
+![Current Version](https://img.shields.io/badge/version-0.4.1-brightgreen.svg?style=flat "0.4.1")
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat "MIT")](LICENSE.md)
 
 Between is a library for working with (time) intervals and the relations between them. It takes as a basis the thirteen
@@ -10,12 +10,12 @@ relations of Allen's Interval Algebra. This is a system for reasoning about (tem
 the paper [Maintaining Knowledge about Temporal Intervals](https://cse.unl.edu/~choueiry/Documents/Allen-CACM1983.pdf).
 
 ## Installation
-Between is published for Scala 2.11, 2.12, and 2.13.0-RC1. To start using it add the following to your `build.sbt`:
+Between is published for Scala 2.11, 2.12, and 2.13. To start using it add the following to your `build.sbt`:
 
 ```
 resolvers += Resolver.bintrayRepo("gn0s1s", "releases")
 
-libraryDependencies += "nl.gn0s1s" %% "between" % "0.4.0"
+libraryDependencies += "nl.gn0s1s" %% "between" % "0.4.1"
 ```
 
 ## Example usage
