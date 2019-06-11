@@ -1,19 +1,11 @@
 package nl.gn0s1s.between
 
-import java.time._
-
 import org.scalacheck._
 import org.scalacheck.Prop._
 
+import spire.implicits.DoubleAlgebra
+
 object IntervalSpec extends Properties("Interval") {
-  def genInterval: Gen[Interval[Instant]] = for {
-    i <- Gen.oneOf(1000L, 2000L, 3000L, 4000L, 5000L, 6000L, 7000L)
-    j <- Gen.oneOf(2000L, 3000L, 4000L, 5000L, 6000L, 7000L, 8000L)
-    if i < j
-  } yield Interval[Instant](Instant.ofEpochSecond(i), Instant.ofEpochSecond(j))
-
-  implicit val arbitraryInterval: Arbitrary[Interval[Instant]] = Arbitrary(genInterval)
-
   def genIntervalDouble: Gen[Interval[Double]] = for {
     i <- Gen.chooseNum[Double](1, 7)
     j <- Gen.chooseNum[Double](2, 8)
@@ -21,17 +13,6 @@ object IntervalSpec extends Properties("Interval") {
   } yield Interval[Double](i, j)
 
   implicit val arbitraryIntervalDouble: Arbitrary[Interval[Double]] = Arbitrary(genIntervalDouble)
-
-  property("Interval[Instant] has always only one unique relation between intervals") = forAll {
-    (i: Interval[Instant], j: Interval[Instant]) =>
-      Relation.full.count(_.apply[Instant](i, j)) == 1
-  }
-
-  property("Interval[Instant] if a relation is true then the converse is also true") = forAll {
-    (i: Interval[Instant], j: Interval[Instant]) =>
-      val relation = i.findRelation(j)
-      relation.inverse(j, i)
-  }
 
   property("Interval[Double] has always only one unique relation between intervals") = forAll {
     (i: Interval[Double], j: Interval[Double]) =>

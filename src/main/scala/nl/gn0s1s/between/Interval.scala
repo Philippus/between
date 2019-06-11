@@ -1,8 +1,11 @@
 package nl.gn0s1s.between
 
-final case class Interval[T](`-`: T, `+`: T)(implicit ordering: Ordering[T]) {
+import spire.algebra.Order
+import spire.implicits.{ partialOrderOps, orderOps }
+
+final case class Interval[T](`-`: T, `+`: T)(implicit ordering: Order[T]) {
   t =>
-  import ordering.mkOrderingOps
+  //  import ordering.mkOrderingOps
 
   require(t.`-`.<(t.`+`))
 

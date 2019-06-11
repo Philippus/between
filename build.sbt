@@ -12,6 +12,7 @@ bintrayOrganization := Some("gn0s1s")
 bintrayRepository := "releases"
 
 libraryDependencies ++= Seq(
+  "org.typelevel" %% "spire" % "0.14.1",
   "org.scalacheck" %% "scalacheck" % "1.14.0" % Test
 )
 
