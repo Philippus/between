@@ -29,8 +29,8 @@ The example below shows two examples for `Double` and `java.time.Instant`:
 ```scala
 import nl.gn0s1s.between._
 
-val i = Interval[Double](1.0, 2.0) // i: nl.gn0s1s.between.Interval[Double] = Interval(1.0,2.0)
-val j = Interval[Double](2.0, 3.0) // j: nl.gn0s1s.between.Interval[Double] = Interval(2.0,3.0)
+val i = Interval[Int](1, 2) // i: nl.gn0s1s.between.Interval[Int] = Interval(1,2)
+val j = Interval[Int](2, 3) // j: nl.gn0s1s.between.Interval[Int] = Interval(2,3)
 
 i meets j // res0: Boolean = true
 j metBy i // res1: Boolean = true
@@ -68,8 +68,8 @@ There's a `findRelation` method which can be used to find out which relation exi
 ```scala
 import nl.gn0s1s.between._
 
-val i = Interval[Double](1.0, 2.0) // i: nl.gn0s1s.between.Interval[Double] = Interval(1.0,2.0)
-val j = Interval[Double](2.0, 3.0) // j: nl.gn0s1s.between.Interval[Double] = Interval(2.0,3.0)
+val i = Interval[Int](1, 2) // i: nl.gn0s1s.between.Interval[Int] = Interval(1,2)
+val j = Interval[Int](2, 3) // j: nl.gn0s1s.between.Interval[Int] = Interval(2,3)
 
 val relationBetweenIAndJ = i.findRelation(j) // relationBetweenIAndJ: nl.gn0s1s.between.Relation = m
 
