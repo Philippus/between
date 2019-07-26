@@ -96,7 +96,7 @@ final case class Interval[T](`-`: T, `+`: T)(implicit ordering: Ordering[T]) {
     else
       None
 
-  def contains(p: T): Boolean = t.`-` >= p && t.`+` <= p
+  def contains(p: T): Boolean = t.`-` <= p && t.`+` >= p
 
   def endsAt(p: T): Boolean = t.`+` == p
 

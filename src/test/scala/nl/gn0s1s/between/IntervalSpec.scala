@@ -152,7 +152,7 @@ object IntervalSpec extends Properties("Interval") {
 
   property("contains returns the expected value") = forAll(genIntervalDouble, genDouble) {
     (i: Interval[Double], d: Double) =>
-      if (i.`-` >= d && i.`+` <= d)
+      if (i.`-` <= d && i.`+` >= d)
         i.contains(d)
       else
         !i.contains(d)
