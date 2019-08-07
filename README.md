@@ -10,7 +10,7 @@ relations of Allen's Interval Algebra. This is a system for reasoning about (tem
 the paper [Maintaining Knowledge about Temporal Intervals](https://cse.unl.edu/~choueiry/Documents/Allen-CACM1983.pdf).
 
 ## Installation
-Between is published for Scala 2.11, 2.12, and 2.13. To start using it add the following to your `build.sbt`:
+Between is published for Scala 2.12 and 2.13. To start using it add the following to your `build.sbt`:
 
 ```
 resolvers += Resolver.bintrayRepo("gn0s1s", "releases")
