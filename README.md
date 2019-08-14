@@ -78,7 +78,7 @@ relationBetweenIAndJ.inverse // res0: nl.gn0s1s.between.Relation = mi
 
 ### Additional methods
 A number of additional methods are availabe on the `Interval[T]` case class, some of which may be familiar for users of
-the [ThreeTen-Extra](http://www.threeten.org/threeten-extra/apidocs/org/threeten/extra/Interval.html) Interval class.
+the [ThreeTen-Extra](https://www.threeten.org/threeten-extra/apidocs/org.threeten.extra/org/threeten/extra/Interval.html) Interval class.
 
 * `abuts`, checks if the interval abuts the supplied interval
 * `encloses`, checks if the interval encloses the supplied interval
