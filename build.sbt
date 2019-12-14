@@ -9,7 +9,7 @@ bintrayOrganization := Some("gn0s1s")
 bintrayRepository := "releases"
 
 libraryDependencies ++= Seq(
-  "org.scalacheck" %% "scalacheck" % "1.14.2" % Test
+  "org.scalacheck" %% "scalacheck" % "1.14.3" % Test
 )
 
 pomExtra :=
