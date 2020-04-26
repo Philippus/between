@@ -5,6 +5,9 @@ startYear := Some(2018)
 homepage := Some(url("https://github.com/philippus/between"))
 licenses += ("MIT", url("http://opensource.org/licenses/MIT"))
 
+crossScalaVersions := List("2.12.11", "2.13.2")
+scalaVersion := "2.12.11"
+
 bintrayOrganization := Some("gn0s1s")
 bintrayRepository := "releases"
 
