@@ -1,6 +1,6 @@
 # Between
 
-![Build Status](https://github.com/Philippus/between/workflows/Scala%20CI/badge.svg)
+![build](https://github.com/Philippus/between/workflows/build/badge.svg)
 [![codecov](https://codecov.io/gh/Philippus/between/branch/master/graph/badge.svg)](https://codecov.io/gh/Philippus/between)
 ![Current Version](https://img.shields.io/badge/version-0.4.2-brightgreen.svg?style=flat "0.4.2")
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat "MIT")](LICENSE.md)
