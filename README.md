@@ -120,7 +120,7 @@ Relation.constraints(Set(o), Set(<, m)) // res0: Set[nl.gn0s1s.between.Relation]
 Allen's Interval Algebra:
 - [Maintaining Knowledge about Temporal Intervals](https://cse.unl.edu/~choueiry/Documents/Allen-CACM1983.pdf)
 - [Wikipedia entry](https://en.wikipedia.org/wiki/Allen%27s_interval_algebra)
-- Thomas A. Alspaugh's Foundations Material on [Allen's Interval Algebra](http://www.ics.uci.edu/~alspaugh/cls/shr/allen.html)
+- Thomas A. Alspaugh's Foundations Material on [Allen's Interval Algebra](https://thomasalspaugh.org/pub/fnd/allen.html)
 
 Related links:
 - [A Modal Logic for Chopping Intervals](https://staff.fnwi.uva.nl/y.venema/papers/1991/vene-moda91.pdf)
