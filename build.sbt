@@ -8,9 +8,6 @@ licenses += ("MIT", url("http://opensource.org/licenses/MIT"))
 crossScalaVersions := List("2.12.12", "2.13.5")
 scalaVersion := crossScalaVersions.value.last
 
-bintrayOrganization := Some("gn0s1s")
-bintrayRepository := "releases"
-
 libraryDependencies ++= Seq(
   "org.scalacheck" %% "scalacheck" % "1.15.3" % Test
 )
