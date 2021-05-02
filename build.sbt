@@ -1,6 +1,5 @@
 name := "between"
 organization := "nl.gn0s1s"
-version := "0.4.2"
 startYear := Some(2018)
 homepage := Some(url("https://github.com/philippus/between"))
 licenses += ("MIT", url("http://opensource.org/licenses/MIT"))
