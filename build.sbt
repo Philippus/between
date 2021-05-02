@@ -4,6 +4,18 @@ version := "0.4.2"
 startYear := Some(2018)
 homepage := Some(url("https://github.com/philippus/between"))
 licenses += ("MIT", url("http://opensource.org/licenses/MIT"))
+scmInfo := Some (ScmInfo(
+  url("https://github.com/Philippus/between"),
+  "scm:git@github.com:Philippus/between.git"
+))
+developers := List(
+  Developer(
+    id = "philippus",
+    name = "Philippus Baalman",
+    email = "",
+    url = url("https://github.com/philippus")
+  )
+)
 
 crossScalaVersions := List("2.12.12", "2.13.5")
 scalaVersion := crossScalaVersions.value.last
@@ -11,16 +23,3 @@ scalaVersion := crossScalaVersions.value.last
 libraryDependencies ++= Seq(
   "org.scalacheck" %% "scalacheck" % "1.15.3" % Test
 )
-
-pomExtra :=
-  <scm>
-    <url>git@github.com:Philippus/between.git</url>
-    <connection>scm:git@github.com:Philippus/between.git</connection>
-  </scm>
-    <developers>
-      <developer>
-        <id>philippus</id>
-        <name>Philippus Baalman</name>
-        <url>https://github.com/philippus</url>
-      </developer>
-    </developers>
