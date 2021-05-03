@@ -20,5 +20,5 @@ crossScalaVersions := List("2.12.12", "2.13.5")
 scalaVersion := crossScalaVersions.value.last
 
 libraryDependencies ++= Seq(
-  "org.scalacheck" %% "scalacheck" % "1.15.3" % Test
+  "org.scalacheck" %% "scalacheck" % "1.15.4" % Test
 )
