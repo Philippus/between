@@ -16,7 +16,7 @@ developers := List(
   )
 )
 
-crossScalaVersions := List("2.12.12", "2.13.6")
+crossScalaVersions := List("2.13.5")
 scalaVersion := crossScalaVersions.value.last
 
 libraryDependencies ++= Seq(
