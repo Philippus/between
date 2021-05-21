@@ -13,6 +13,11 @@ developers := List(
   )
 )
 
+ThisBuild / versionScheme := Some("semver-spec")
+ThisBuild / versionPolicyIntention := Compatibility.None
+
+Compile / packageBin / packageOptions += Package.ManifestAttributes("Automatic-Module-Name" -> "nl.gn0s1s.between")
+
 crossScalaVersions := List("2.13.6")
 scalaVersion := crossScalaVersions.value.last
 
