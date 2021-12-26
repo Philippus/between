@@ -9,9 +9,8 @@ object RelationSpec extends Properties("Relation") {
 
   property("there are thirteen relations defined") = Relation.full.size == 13
 
-  property("the inverse of the inverse of a relation is the relation") = forAll(genRelation) {
-    relation =>
-      relation.inverse.inverse.equals(relation)
+  property("the inverse of the inverse of a relation is the relation") = forAll(genRelation) { relation =>
+    relation.inverse.inverse.equals(relation)
   }
 
   property("from the paper - constraints between L and R given path: R <-(< m mi >)- - S - -(o m)-> L ") =

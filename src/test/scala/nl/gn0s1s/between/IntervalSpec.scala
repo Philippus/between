@@ -44,85 +44,77 @@ object IntervalSpec extends Properties("Interval") {
       relation.inverse(j, i)
   }
 
-  property("all relations and their inverses are available") = forAll {
-    (i: Interval[Double], j: Interval[Double]) =>
-      (i before j) == (j after i) &&
-        (i precedes j) == (j precededBy i) &&
-        (i meets j) == (j metBy i) &&
-        (i overlaps j) == (j overlappedBy i) &&
-        (i finishes j) == (j finishedBy i) &&
-        (i ends j) == (j endedBy i) &&
-        (i during j) == (j contains i) &&
-        (i starts j) == (j startedBy i) &&
-        (i si j) == (i startedBy j) &&
-        (i encloses j) == (j enclosedBy i)
+  property("all relations and their inverses are available") = forAll { (i: Interval[Double], j: Interval[Double]) =>
+    (i before j) == (j after i) &&
+    (i precedes j) == (j precededBy i) &&
+    (i meets j) == (j metBy i) &&
+    (i overlaps j) == (j overlappedBy i) &&
+    (i finishes j) == (j finishedBy i) &&
+    (i ends j) == (j endedBy i) &&
+    (i during j) == (j contains i) &&
+    (i starts j) == (j startedBy i) &&
+    (i si j) == (i startedBy j) &&
+    (i encloses j) == (j enclosedBy i)
   }
 
   def genDouble = Gen.chooseNum[Double](2, 7)
 
-  property("abuts returns the expected value") = forAll {
-    (i: Interval[Double], j: Interval[Double]) =>
-      i.findRelation(j) match {
-        case `m` | `mi` => i abuts j
-        case _ => !(i abuts j)
-      }
+  property("abuts returns the expected value") = forAll { (i: Interval[Double], j: Interval[Double]) =>
+    i.findRelation(j) match {
+      case `m` | `mi` => i abuts j
+      case _ => !(i abuts j)
+    }
   }
 
-  property("gap returns the expected Interval") = forAll {
-    (i: Interval[Double], j: Interval[Double]) =>
-      i.findRelation(j) match {
-        case `<` => i.gap(j).contains(Interval(i.`+`, j.`-`))
-        case `>` => i.gap(j).contains(Interval(j.`+`, i.`-`))
-        case _ => i.gap(j).isEmpty
-      }
+  property("gap returns the expected Interval") = forAll { (i: Interval[Double], j: Interval[Double]) =>
+    i.findRelation(j) match {
+      case `<` => i.gap(j).contains(Interval(i.`+`, j.`-`))
+      case `>` => i.gap(j).contains(Interval(j.`+`, i.`-`))
+      case _ => i.gap(j).isEmpty
+    }
   }
 
-  property("intersection returns the expected interval") = forAll {
-    (i: Interval[Double], j: Interval[Double]) =>
-      i.findRelation(j) match {
-        case `<` | `m` | `mi` | `>` => i.intersection(j).isEmpty
-        case `o` => i.intersection(j).contains(Interval(j.`-`, i.`+`))
-        case `f` | `d` | `s` | `is` => i.intersection(j).contains(Interval(i.`-`, i.`+`))
-        case `si` | `di` | `fi` => i.intersection(j).contains(Interval(j.`-`, j.`+`))
-        case `oi` => i.intersection(j).contains(Interval(i.`-`, j.`+`))
-      }
+  property("intersection returns the expected interval") = forAll { (i: Interval[Double], j: Interval[Double]) =>
+    i.findRelation(j) match {
+      case `<` | `m` | `mi` | `>` => i.intersection(j).isEmpty
+      case `o` => i.intersection(j).contains(Interval(j.`-`, i.`+`))
+      case `f` | `d` | `s` | `is` => i.intersection(j).contains(Interval(i.`-`, i.`+`))
+      case `si` | `di` | `fi` => i.intersection(j).contains(Interval(j.`-`, j.`+`))
+      case `oi` => i.intersection(j).contains(Interval(i.`-`, j.`+`))
+    }
   }
 
-  property("minus returns the expected interval") = forAll {
-    (i: Interval[Double], j: Interval[Double]) =>
-      i.findRelation(j) match {
-        case `<` | `m` | `mi` | `>` => i.minus(j).contains(Interval(i.`-`, i.`+`))
-        case `o` | `fi` => i.minus(j).contains(Interval(i.`-`, j.`-`))
-        case `f` | `d` | `s` | `is` => i.minus(j).isEmpty
-        case `si` | `oi` => i.minus(j).contains(Interval(j.`+`, i.`+`))
-        case `di` => i.minus(j).contains(Interval(i.`-`, j.`-`)) && i.minus(j).contains(Interval(j.`+`, i.`+`))
-      }
+  property("minus returns the expected interval") = forAll { (i: Interval[Double], j: Interval[Double]) =>
+    i.findRelation(j) match {
+      case `<` | `m` | `mi` | `>` => i.minus(j).contains(Interval(i.`-`, i.`+`))
+      case `o` | `fi` => i.minus(j).contains(Interval(i.`-`, j.`-`))
+      case `f` | `d` | `s` | `is` => i.minus(j).isEmpty
+      case `si` | `oi` => i.minus(j).contains(Interval(j.`+`, i.`+`))
+      case `di` => i.minus(j).contains(Interval(i.`-`, j.`-`)) && i.minus(j).contains(Interval(j.`+`, i.`+`))
+    }
   }
 
-  property("span returns the expected interval") = forAll {
-    (i: Interval[Double], j: Interval[Double]) =>
-      i.findRelation(j) match {
-        case `<` => i.span(j) == Interval(i.`-`, j.`+`)
-        case `>` => i.span(j) == Interval(j.`-`, i.`+`)
-        case _ => i.span(j) == i.union(j).get
-      }
+  property("span returns the expected interval") = forAll { (i: Interval[Double], j: Interval[Double]) =>
+    i.findRelation(j) match {
+      case `<` => i.span(j) == Interval(i.`-`, j.`+`)
+      case `>` => i.span(j) == Interval(j.`-`, i.`+`)
+      case _ => i.span(j) == i.union(j).get
+    }
   }
 
-  property("span encloses both intervals") = forAll {
-    (i: Interval[Double], j: Interval[Double]) =>
-      val span = i.span(j)
-      (span encloses i) && (span encloses j)
+  property("span encloses both intervals") = forAll { (i: Interval[Double], j: Interval[Double]) =>
+    val span = i.span(j)
+    (span encloses i) && (span encloses j)
   }
 
-  property("union returns the expected interval") = forAll {
-    (i: Interval[Double], j: Interval[Double]) =>
-      i.findRelation(j) match {
-        case `<` | `>` => i.union(j).isEmpty
-        case `m` | `o` => i.union(j).contains(Interval(i.`-`, j.`+`))
-        case `f` | `d` | `s` => i.union(j).contains(Interval(j.`-`, j.`+`))
-        case `is` | `si` | `di` | `fi` => i.union(j).contains(Interval(i.`-`, i.`+`))
-        case `oi` | `mi` => i.union(j).contains(Interval(j.`-`, i.`+`))
-      }
+  property("union returns the expected interval") = forAll { (i: Interval[Double], j: Interval[Double]) =>
+    i.findRelation(j) match {
+      case `<` | `>` => i.union(j).isEmpty
+      case `m` | `o` => i.union(j).contains(Interval(i.`-`, j.`+`))
+      case `f` | `d` | `s` => i.union(j).contains(Interval(j.`-`, j.`+`))
+      case `is` | `si` | `di` | `fi` => i.union(j).contains(Interval(i.`-`, i.`+`))
+      case `oi` | `mi` => i.union(j).contains(Interval(j.`-`, i.`+`))
+    }
   }
 
   property("after returns the expected value") = forAll(genIntervalDouble, genDouble) {
