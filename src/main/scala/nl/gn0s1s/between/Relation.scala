@@ -92,7 +92,6 @@ object Relation {
     (<, f) -> Set(<, o, m, d, s),
     (<, fi) -> Set(<),
     (<, is) -> Set(<),
-
     (>, <) -> full,
     (>, >) -> Set(>),
     (>, d) -> Set(>, oi, mi, d, f),
@@ -106,7 +105,6 @@ object Relation {
     (>, f) -> Set(>),
     (>, fi) -> Set(>),
     (>, is) -> Set(>),
-
     (d, <) -> Set(<),
     (d, >) -> Set(>),
     (d, d) -> Set(d),
@@ -120,7 +118,6 @@ object Relation {
     (d, f) -> Set(d),
     (d, fi) -> Set(<, o, m, d, s),
     (d, is) -> Set(d),
-
     (di, <) -> Set(<, o, m, di, fi),
     (di, >) -> Set(>, oi, di, mi, si),
     (di, d) -> concur,
@@ -134,7 +131,6 @@ object Relation {
     (di, f) -> Set(di, si, oi),
     (di, fi) -> Set(di),
     (di, is) -> Set(di),
-
     (o, <) -> Set(<),
     (o, >) -> Set(>, oi, di, mi, si),
     (o, d) -> Set(o, d, s),
@@ -148,7 +144,6 @@ object Relation {
     (o, f) -> Set(d, s, o),
     (o, fi) -> Set(<, o, m),
     (o, is) -> Set(o),
-
     (oi, <) -> Set(<, o, m, di, fi),
     (oi, >) -> Set(>),
     (oi, d) -> Set(oi, d, f),
@@ -162,7 +157,6 @@ object Relation {
     (oi, f) -> Set(oi),
     (oi, fi) -> Set(oi, di, si),
     (oi, is) -> Set(oi),
-
     (m, <) -> Set(<),
     (m, >) -> Set(>, oi, di, mi, si),
     (m, d) -> Set(o, d, s),
@@ -176,7 +170,6 @@ object Relation {
     (m, f) -> Set(d, s, o),
     (m, fi) -> Set(<),
     (m, is) -> Set(m),
-
     (mi, <) -> Set(<, o, m, di, fi),
     (mi, >) -> Set(>),
     (mi, d) -> Set(oi, d, f),
@@ -190,7 +183,6 @@ object Relation {
     (mi, f) -> Set(mi),
     (mi, fi) -> Set(mi),
     (mi, is) -> Set(mi),
-
     (s, <) -> Set(<),
     (s, >) -> Set(>),
     (s, d) -> Set(d),
@@ -204,7 +196,6 @@ object Relation {
     (s, f) -> Set(d),
     (s, fi) -> Set(<, m, o),
     (s, is) -> Set(s),
-
     (si, <) -> Set(<, o, m, di, fi),
     (si, >) -> Set(>),
     (si, d) -> Set(oi, d, f),
@@ -218,7 +209,6 @@ object Relation {
     (si, f) -> Set(oi),
     (si, fi) -> Set(di),
     (si, is) -> Set(si),
-
     (f, <) -> Set(<),
     (f, >) -> Set(>),
     (f, d) -> Set(d),
@@ -232,7 +222,6 @@ object Relation {
     (f, f) -> Set(f),
     (f, fi) -> Set(f, fi, is),
     (f, is) -> Set(f),
-
     (fi, <) -> Set(<),
     (fi, >) -> Set(>, oi, mi, di, si),
     (fi, d) -> Set(o, d, s),
@@ -246,7 +235,6 @@ object Relation {
     (fi, f) -> Set(f, fi, is),
     (fi, fi) -> Set(fi),
     (fi, is) -> Set(fi),
-
     (is, <) -> Set(<),
     (is, >) -> Set(>),
     (is, d) -> Set(d),
@@ -259,7 +247,8 @@ object Relation {
     (is, si) -> Set(si),
     (is, f) -> Set(f),
     (is, fi) -> Set(fi),
-    (is, is) -> Set(is))
+    (is, is) -> Set(is)
+  )
 
   def constraints(r1: Set[Relation], r2: Set[Relation]): Set[Relation] = {
     (for {
