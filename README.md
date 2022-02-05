@@ -14,8 +14,6 @@ the paper [Maintaining Knowledge about Temporal Intervals](https://cse.unl.edu/~
 Between is published for Scala 2.12 and 2.13. To start using it add the following to your `build.sbt`:
 
 ```
-resolvers += Resolver.bintrayRepo("gn0s1s", "releases")
-
 libraryDependencies += "nl.gn0s1s" %% "between" % "0.4.2"
 ```
 
