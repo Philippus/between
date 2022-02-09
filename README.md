@@ -124,6 +124,7 @@ Related links:
 - [A Modal Logic for Chopping Intervals](https://staff.fnwi.uva.nl/y.venema/papers/1991/vene-moda91.pdf)
 - [SOWL QL: Querying Spatio - Temporal Ontologies in OWL](http://www.intelligence.tuc.gr/~petrakis/publications/SOWLQL-JDS.pdf)
 - [AsterixDB Temporal Functions: Allen’s Relations](https://asterixdb.apache.org/docs/0.8.8-incubating/aql/allens.html)
+- Haskell package that does something similar for Haskell - https://github.com/novisci/interval-algebra
 
 ## License
 The code is available under the [MIT license](LICENSE.md).
