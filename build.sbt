@@ -2,7 +2,7 @@ name := "between"
 organization := "nl.gn0s1s"
 startYear := Some(2018)
 homepage := Some(url("https://github.com/philippus/between"))
-licenses += ("MIT", url("http://opensource.org/licenses/MIT"))
+licenses += ("MPL-2.0", url("https://www.mozilla.org/MPL/2.0/"))
 
 developers := List(
   Developer(
