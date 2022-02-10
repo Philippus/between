@@ -92,6 +92,7 @@ Some point related methods are:
 * `after`, checks if the interval is after the supplied point
 * `before`, checks if the interval is before the supplied point
 * `chop`, chops this interval into two intervals that meet at the supplied point
+* `clamp`, clamps a supplied point within the interval
 * `contains`, checks if supplied point is within the interval
 * `endsAt`, checks if the interval ends at the supplied point
 * `startsAt`, checks if the interval starts at the supplied point
