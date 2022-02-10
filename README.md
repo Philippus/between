@@ -119,7 +119,7 @@ Allen's Interval Algebra:
 - [Maintaining Knowledge about Temporal Intervals](https://cse.unl.edu/~choueiry/Documents/Allen-CACM1983.pdf)
 - [Wikipedia entry](https://en.wikipedia.org/wiki/Allen%27s_interval_algebra)
 - Thomas A. Alspaugh's Foundations Material on [Allen's Interval Algebra](https://thomasalspaugh.org/pub/fnd/allen.html)
-- ["Moments and Points in an Interval-Based Temporal Logic"](https://onlinelibrary.wiley.com/doi/10.1111/j.1467-8640.1989.tb00329.x)
+- [Moments and Points in an Interval-Based Temporal Logic](https://onlinelibrary.wiley.com/doi/10.1111/j.1467-8640.1989.tb00329.x)
 
 Related links:
 - [A Modal Logic for Chopping Intervals](https://staff.fnwi.uva.nl/y.venema/papers/1991/vene-moda91.pdf)
