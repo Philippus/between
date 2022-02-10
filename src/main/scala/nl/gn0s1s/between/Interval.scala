@@ -105,4 +105,12 @@ final case class Interval[T](`-`: T, `+`: T)(implicit ordering: Ordering[T]) {
   def `with-`(p: T): Interval[T] = Interval[T](p, t.`+`)
 
   def `with+`(p: T): Interval[T] = Interval[T](t.`-`, p)
+
+  def clamp(p: T): T =
+    if (p < t.`-`)
+      t.`-`
+    else if (p > t.`+`)
+      t.`+`
+    else
+      p
 }
