@@ -1,10 +1,8 @@
 package nl.gn0s1s.between
 
-final case class Interval[T](`-`: T, `+`: T)(implicit ordering: Ordering[T]) {
+final case class Interval[T] private (`-`: T, `+`: T)(implicit ordering: Ordering[T]) {
   t =>
   import ordering.mkOrderingOps
-
-  require(t.`-`.<(t.`+`))
 
   def <(s: Interval[T]): Boolean = t.`+` < s.`-`
   def before(s: Interval[T]): Boolean = this < s
@@ -55,34 +53,34 @@ final case class Interval[T](`-`: T, `+`: T)(implicit ordering: Ordering[T]) {
 
   def gap(s: Interval[T]): Option[Interval[T]] =
     if (this < s || this > s) {
-      Some(Interval[T](t.`+`.min(s.`+`), t.`-`.max(s.`-`)))
+      Interval[T](t.`+`.min(s.`+`), t.`-`.max(s.`-`))
     } else
       None
 
   def intersection(s: Interval[T]): Option[Interval[T]] =
     if (!((this < s) || (this abuts s) || (this > s)))
-      Some(Interval[T](t.`-`.max(s.`-`), t.`+`.min(s.`+`)))
+      Interval[T](t.`-`.max(s.`-`), t.`+`.min(s.`+`))
     else
       None
 
   def span(s: Interval[T]): Interval[T] =
-    Interval[T](t.`-`.min(s.`-`), t.`+`.max(s.`+`))
+    new Interval[T](t.`-`.min(s.`-`), t.`+`.max(s.`+`))
 
   def minus(s: Interval[T]): Set[Interval[T]] =
     if (this enclosedBy s)
       Set()
     else if ((this o s) || (this fi s))
-      Set(Interval[T](t.`-`, s.`-`))
+      Set(new Interval[T](t.`-`, s.`-`))
     else if ((this oi s) || (this si s))
-      Set(Interval[T](s.`+`, t.`+`))
+      Set(new Interval[T](s.`+`, t.`+`))
     else if (this di s)
-      Set(Interval[T](t.`-`, s.`-`), Interval[T](s.`+`, t.`+`))
+      Set(new Interval[T](t.`-`, s.`-`), new Interval[T](s.`+`, t.`+`))
     else
       Set(this)
 
   def union(s: Interval[T]): Option[Interval[T]] =
     if (!(this < s || this > s))
-      Some(Interval[T](t.`-`.min(s.`-`), t.`+`.max(s.`+`)))
+      Interval[T](t.`-`.min(s.`-`), t.`+`.max(s.`+`))
     else
       None
 
@@ -92,7 +90,7 @@ final case class Interval[T](`-`: T, `+`: T)(implicit ordering: Ordering[T]) {
 
   def chop(p: T): Option[(Interval[T], Interval[T])] =
     if (t.`-` < p && t.`+` > p)
-      Some((Interval[T](t.`-`, p), Interval[T](p, t.`+`)))
+      Some((new Interval[T](t.`-`, p), new Interval[T](p, t.`+`)))
     else
       None
 
@@ -102,9 +100,9 @@ final case class Interval[T](`-`: T, `+`: T)(implicit ordering: Ordering[T]) {
 
   def startsAt(p: T): Boolean = t.`-` == p
 
-  def `with-`(p: T): Interval[T] = Interval[T](p, t.`+`)
+  def `with-`(p: T): Option[Interval[T]] = Interval[T](p, t.`+`)
 
-  def `with+`(p: T): Interval[T] = Interval[T](t.`-`, p)
+  def `with+`(p: T): Option[Interval[T]] = Interval[T](t.`-`, p)
 
   def clamp(p: T): T =
     if (p < t.`-`)
@@ -113,4 +111,14 @@ final case class Interval[T](`-`: T, `+`: T)(implicit ordering: Ordering[T]) {
       t.`+`
     else
       p
+}
+
+object Interval {
+  def apply[T](`-`: T, `+`: T)(implicit ordering: Ordering[T]): Option[Interval[T]] = {
+    import ordering.mkOrderingOps
+    if (`-`.<(`+`))
+      Some(new Interval(`-`, `+`))
+    else
+      None
+  }
 }

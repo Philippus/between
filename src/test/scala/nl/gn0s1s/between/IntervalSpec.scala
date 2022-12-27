@@ -10,7 +10,7 @@ object IntervalSpec extends Properties("Interval") {
     i <- Gen.oneOf(1000L, 2000L, 3000L, 4000L, 5000L, 6000L, 7000L)
     j <- Gen.oneOf(2000L, 3000L, 4000L, 5000L, 6000L, 7000L, 8000L)
     if i < j
-  } yield Interval[Instant](Instant.ofEpochSecond(i), Instant.ofEpochSecond(j))
+  } yield Interval[Instant](Instant.ofEpochSecond(i), Instant.ofEpochSecond(j)).get
 
   implicit val arbitraryInterval: Arbitrary[Interval[Instant]] = Arbitrary(genInterval)
 
@@ -18,7 +18,7 @@ object IntervalSpec extends Properties("Interval") {
     i <- Gen.chooseNum[Double](1, 7)
     j <- Gen.chooseNum[Double](2, 8)
     if i < j
-  } yield Interval[Double](i, j)
+  } yield Interval[Double](i, j).get
 
   implicit val arbitraryIntervalDouble: Arbitrary[Interval[Double]] = Arbitrary(genIntervalDouble)
 
@@ -57,7 +57,7 @@ object IntervalSpec extends Properties("Interval") {
     (i encloses j) == (j enclosedBy i)
   }
 
-  def genDouble = Gen.chooseNum[Double](2, 7)
+  def genDouble: Gen[Double] = Gen.chooseNum[Double](2, 7)
 
   property("abuts returns the expected value") = forAll { (i: Interval[Double], j: Interval[Double]) =>
     i.findRelation(j) match {
@@ -68,8 +68,8 @@ object IntervalSpec extends Properties("Interval") {
 
   property("gap returns the expected Interval") = forAll { (i: Interval[Double], j: Interval[Double]) =>
     i.findRelation(j) match {
-      case `<` => i.gap(j).contains(Interval(i.`+`, j.`-`))
-      case `>` => i.gap(j).contains(Interval(j.`+`, i.`-`))
+      case `<` => i.gap(j).equals(Interval(i.`+`, j.`-`))
+      case `>` => i.gap(j).equals(Interval(j.`+`, i.`-`))
       case _ => i.gap(j).isEmpty
     }
   }
@@ -77,28 +77,28 @@ object IntervalSpec extends Properties("Interval") {
   property("intersection returns the expected interval") = forAll { (i: Interval[Double], j: Interval[Double]) =>
     i.findRelation(j) match {
       case `<` | `m` | `mi` | `>` => i.intersection(j).isEmpty
-      case `o` => i.intersection(j).contains(Interval(j.`-`, i.`+`))
-      case `f` | `d` | `s` | `is` => i.intersection(j).contains(Interval(i.`-`, i.`+`))
-      case `si` | `di` | `fi` => i.intersection(j).contains(Interval(j.`-`, j.`+`))
-      case `oi` => i.intersection(j).contains(Interval(i.`-`, j.`+`))
+      case `o` => i.intersection(j).equals(Interval(j.`-`, i.`+`))
+      case `f` | `d` | `s` | `is` => i.intersection(j).equals(Interval(i.`-`, i.`+`))
+      case `si` | `di` | `fi` => i.intersection(j).equals(Interval(j.`-`, j.`+`))
+      case `oi` => i.intersection(j).equals(Interval(i.`-`, j.`+`))
     }
   }
 
   property("minus returns the expected interval") = forAll { (i: Interval[Double], j: Interval[Double]) =>
     i.findRelation(j) match {
-      case `<` | `m` | `mi` | `>` => i.minus(j).contains(Interval(i.`-`, i.`+`))
-      case `o` | `fi` => i.minus(j).contains(Interval(i.`-`, j.`-`))
+      case `<` | `m` | `mi` | `>` => i.minus(j).contains(Interval(i.`-`, i.`+`).get)
+      case `o` | `fi` => i.minus(j).contains(Interval(i.`-`, j.`-`).get)
       case `f` | `d` | `s` | `is` => i.minus(j).isEmpty
-      case `si` | `oi` => i.minus(j).contains(Interval(j.`+`, i.`+`))
-      case `di` => i.minus(j).contains(Interval(i.`-`, j.`-`)) && i.minus(j).contains(Interval(j.`+`, i.`+`))
+      case `si` | `oi` => i.minus(j).contains(Interval(j.`+`, i.`+`).get)
+      case `di` => i.minus(j).contains(Interval(i.`-`, j.`-`).get) && i.minus(j).contains(Interval(j.`+`, i.`+`).get)
     }
   }
 
   property("span returns the expected interval") = forAll { (i: Interval[Double], j: Interval[Double]) =>
     i.findRelation(j) match {
-      case `<` => i.span(j) == Interval(i.`-`, j.`+`)
-      case `>` => i.span(j) == Interval(j.`-`, i.`+`)
-      case _ => i.span(j) == i.union(j).get
+      case `<` => Interval(i.`-`, j.`+`).contains(i.span(j))
+      case `>` => Interval(j.`-`, i.`+`).contains(i.span(j))
+      case _ => i.union(j).contains(i.span(j))
     }
   }
 
@@ -110,10 +110,10 @@ object IntervalSpec extends Properties("Interval") {
   property("union returns the expected interval") = forAll { (i: Interval[Double], j: Interval[Double]) =>
     i.findRelation(j) match {
       case `<` | `>` => i.union(j).isEmpty
-      case `m` | `o` => i.union(j).contains(Interval(i.`-`, j.`+`))
-      case `f` | `d` | `s` => i.union(j).contains(Interval(j.`-`, j.`+`))
-      case `is` | `si` | `di` | `fi` => i.union(j).contains(Interval(i.`-`, i.`+`))
-      case `oi` | `mi` => i.union(j).contains(Interval(j.`-`, i.`+`))
+      case `m` | `o` => i.union(j).equals(Interval(i.`-`, j.`+`))
+      case `f` | `d` | `s` => i.union(j).equals(Interval(j.`-`, j.`+`))
+      case `is` | `si` | `di` | `fi` => i.union(j).equals(Interval(i.`-`, i.`+`))
+      case `oi` | `mi` => i.union(j).equals(Interval(j.`-`, i.`+`))
     }
   }
 
@@ -169,26 +169,27 @@ object IntervalSpec extends Properties("Interval") {
   property("with- returns the expected interval") = forAll(genIntervalDouble, genDouble) {
     (i: Interval[Double], d: Double) =>
       if (d < i.`+`)
-        i.`with-`(d) == Interval(d, i.`+`)
+        i.`with-`(d).equals(Interval(d, i.`+`))
       else
-        Prop.throws(classOf[IllegalArgumentException])(Interval(d, i.`+`))
+        i.`with-`(d).isEmpty
   }
 
   property("with+ returns the expected interval") = forAll(genIntervalDouble, genDouble) {
     (i: Interval[Double], d: Double) =>
       if (d > i.`-`)
-        i.`with+`(d) == Interval(i.`-`, d)
+        i.`with+`(d).equals(Interval(i.`-`, d))
       else
-        Prop.throws(classOf[IllegalArgumentException])(Interval(i.`-`, d))
+        i.`with+`(d).isEmpty
   }
 
   property("clamp returns the expected value") = forAll(genIntervalDouble, genDouble) {
-    (i: Interval[Double], d: Double) =>
+    (i: Interval[Double], d: Double) => {
       if (d < i.`-`)
         i.clamp(d) == i.`-`
       else if (d > i.`+`)
         i.clamp(d) == i.`+`
       else
         i.clamp(d) == d
+    }
   }
 }
