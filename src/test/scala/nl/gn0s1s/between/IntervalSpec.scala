@@ -183,13 +183,14 @@ object IntervalSpec extends Properties("Interval") {
   }
 
   property("clamp returns the expected value") = forAll(genIntervalDouble, genDouble) {
-    (i: Interval[Double], d: Double) => {
-      if (d < i.`-`)
-        i.clamp(d) == i.`-`
-      else if (d > i.`+`)
-        i.clamp(d) == i.`+`
-      else
-        i.clamp(d) == d
-    }
+    (i: Interval[Double], d: Double) =>
+      {
+        if (d < i.`-`)
+          i.clamp(d) == i.`-`
+        else if (d > i.`+`)
+          i.clamp(d) == i.`+`
+        else
+          i.clamp(d) == d
+      }
   }
 }
