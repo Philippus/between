@@ -1,9 +1,9 @@
 package nl.gn0s1s.between
 
-import java.time._
+import java.time.*
 
-import org.scalacheck._
-import org.scalacheck.Prop._
+import org.scalacheck.*
+import org.scalacheck.Prop.*
 
 object IntervalSpec extends Properties("Interval") {
   def genInterval: Gen[Interval[Instant]] = for {

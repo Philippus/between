@@ -18,8 +18,10 @@ ThisBuild / versionPolicyIntention := Compatibility.None
 
 Compile / packageBin / packageOptions += Package.ManifestAttributes("Automatic-Module-Name" -> "nl.gn0s1s.between")
 
-crossScalaVersions := List("2.13.15")
-scalaVersion       := crossScalaVersions.value.last
+scalaVersion := "2.13.15"
+crossScalaVersions += "3.3.4"
+
+scalacOptions += "-Xsource:3"
 
 libraryDependencies ++= Seq(
   "org.scalacheck" %% "scalacheck" % "1.18.1" % Test

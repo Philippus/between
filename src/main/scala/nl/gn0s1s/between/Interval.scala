@@ -1,5 +1,8 @@
 package nl.gn0s1s.between
 
+import scala.annotation.nowarn
+
+@nowarn
 final case class Interval[T] private (`-`: T, `+`: T)(implicit ordering: Ordering[T]) {
   t =>
   import ordering.mkOrderingOps

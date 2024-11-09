@@ -1,8 +1,8 @@
 package nl.gn0s1s.between
 
-import org.scalacheck._
+import org.scalacheck.*
 import org.scalacheck.Gen.oneOf
-import org.scalacheck.Prop._
+import org.scalacheck.Prop.*
 
 object RelationSpec extends Properties("Relation") {
   def genRelation: Gen[Relation] = oneOf(Relation.full.toSeq)
