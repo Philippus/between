@@ -1,7 +1,7 @@
 package nl.gn0s1s.between
 
 import org.scalacheck.Properties
-import org.scalacheck.Prop._
+import org.scalacheck.Prop.*
 
 object TransitivityTableSpec extends Properties("Transitivity Table") {
   property("totals 13x13 entries") = {

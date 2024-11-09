@@ -1,10 +1,10 @@
 package nl.gn0s1s.between
 
-import org.scalacheck._
-import org.scalacheck.Prop._
+import org.scalacheck.*
+import org.scalacheck.Prop.*
 
 import java.time.Instant
-import scala.math.Ordering.Implicits._
+import scala.math.Ordering.Implicits.*
 
 /** Spec for axioms in "Moments and Points in an Interval-Based Temporal Logic"
   */
