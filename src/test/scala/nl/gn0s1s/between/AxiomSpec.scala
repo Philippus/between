@@ -20,7 +20,7 @@ object AxiomSpec extends Properties("Axiom") {
       Interval[Instant](p, q).get, // i
       Interval[Instant](q, r).get, // j
       Interval[Instant](q, s).get, // k
-      Interval[Instant](t, q).get  // l
+      Interval[Instant](t, q).get // l
     )
 
   property("M1: if two periods both meet a third, then any period met by one must also be met by the other.") =
@@ -40,7 +40,7 @@ object AxiomSpec extends Properties("Axiom") {
       Interval[Instant](p, q).get, // i
       Interval[Instant](q, r).get, // j
       Interval[Instant](s, t).get, // k
-      Interval[Instant](t, u).get  // l
+      Interval[Instant](t, u).get // l
     )
 
   property(
@@ -71,7 +71,7 @@ object AxiomSpec extends Properties("Axiom") {
       r <- Gen.choose(q, Instant.MAX) if q < r
     } yield (
       Interval[Instant](p, q).get, // i
-      Interval[Instant](q, r).get  // j
+      Interval[Instant](q, r).get // j
     )
 
   property("ML2: if i meets j then j does not meet i") = forAll(genML2) { case (i, j) =>
@@ -85,7 +85,7 @@ object AxiomSpec extends Properties("Axiom") {
       r <- Gen.choose(q, Instant.MAX) if q < r
     } yield (
       Interval[Instant](p, q).get, // i
-      Interval[Instant](q, r).get  // m
+      Interval[Instant](q, r).get // m
     )
 
   property("ML3: there is no period m such that i:m:i,") = forAll(genML3) { case (i, m) =>
@@ -101,7 +101,7 @@ object AxiomSpec extends Properties("Axiom") {
     } yield (
       Interval[Instant](p, q).get, // i
       r,                           // startOfJ
-      s                            // endOfK
+      s // endOfK
     )
 
   property("M3: time does not start or stop") = forAll(genM3) { case (i, startOfJ, endOfK) =>
@@ -121,7 +121,7 @@ object AxiomSpec extends Properties("Axiom") {
       Interval[Instant](p, q).get, // i
       Interval[Instant](q, r).get, // j
       s,                           // startOfM
-      t                            // endOfN
+      t // endOfN
     )
 
   property("M4: if two meets are separated by intervals, then this sequence is a longer interval") = forAll(genM4) {
@@ -143,7 +143,7 @@ object AxiomSpec extends Properties("Axiom") {
       Interval[Instant](p, q).get, // i
       Interval[Instant](q, r).get, // j
       Interval[Instant](r, s).get, // l
-      Interval[Instant](q, s).get  // k
+      Interval[Instant](q, s).get // k
     )
 
   property("M5: There is only one time period between any two meeting-places.") = forAll(genM5) { case (i, j, l, k) =>
