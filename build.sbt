@@ -24,5 +24,5 @@ crossScalaVersions += "3.3.6"
 scalacOptions += "-Xsource:3"
 
 libraryDependencies ++= Seq(
-  "org.scalacheck" %% "scalacheck" % "1.18.1" % Test
+  "org.scalacheck" %% "scalacheck" % "1.19.0" % Test
 )
