@@ -18,7 +18,7 @@ ThisBuild / versionPolicyIntention := Compatibility.None
 
 Compile / packageBin / packageOptions += Package.ManifestAttributes("Automatic-Module-Name" -> "nl.gn0s1s.between")
 
-scalaVersion := "2.13.17"
+scalaVersion := "2.13.18"
 crossScalaVersions += "3.3.7"
 
 scalacOptions += "-Xsource:3"
