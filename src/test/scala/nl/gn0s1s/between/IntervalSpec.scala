@@ -45,16 +45,26 @@ object IntervalSpec extends Properties("Interval") {
   }
 
   property("all relations and their inverses are available") = forAll { (i: Interval[Double], j: Interval[Double]) =>
-    (i before j) == (j after i) &&
-    (i precedes j) == (j precededBy i) &&
-    (i meets j) == (j metBy i) &&
-    (i overlaps j) == (j overlappedBy i) &&
-    (i finishes j) == (j finishedBy i) &&
-    (i ends j) == (j endedBy i) &&
-    (i during j) == (j contains i) &&
-    (i starts j) == (j startedBy i) &&
-    (i si j) == (i startedBy j) &&
-    (i encloses j) == (j enclosedBy i)
+    (i before j) ==
+      (j after i) &&
+      (i precedes j) ==
+      (j precededBy i) &&
+      (i meets j) ==
+      (j metBy i) &&
+      (i overlaps j) ==
+      (j overlappedBy i) &&
+      (i finishes j) ==
+      (j finishedBy i) &&
+      (i ends j) ==
+      (j endedBy i) &&
+      (i during j) ==
+      (j contains i) &&
+      (i starts j) ==
+      (j startedBy i) &&
+      (i si j) ==
+      (i startedBy j) &&
+      (i encloses j) ==
+      (j enclosedBy i)
   }
 
   def genDouble: Gen[Double] = Gen.chooseNum[Double](2, 7)
